@@ -1,13 +1,9 @@
 #include <CountUpDownTimer.h>
-CountUpDownTimer T(UP, HIGH); 
 
-int status = 13;
+CountUpDownTimer T(UP, HIGH); 
 
 // False = Low, True = High
 bool last[10];
-// Where fps means how many samples to take per second and 
-// time is how many samples have elapsed
-int fps = 250; 
 
 // Game Constants
 const int doubPoints = 25;
@@ -23,7 +19,7 @@ int score = 0;
 
 void setup() {
   Serial.begin(9600);
-  pinMode(status, OUTPUT);
+  pinMode(13, OUTPUT);
   Serial.println("------");
     
   for (int i = 2; i <= 9; i++)
@@ -34,7 +30,7 @@ void setup() {
 }
 
 void loop() {
-  digitalWrite(status, HIGH);
+  digitalWrite(13, HIGH);
   T.Timer(); // run the timer
     
   if (nextNote >= (sizeof(testSong) / sizeof(int))) {
@@ -96,5 +92,5 @@ void loop() {
       last[8] = false; 
   }
   
-  delay(1000 / fps);
+  delay(1000 / 250);
 }
