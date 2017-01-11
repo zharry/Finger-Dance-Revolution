@@ -27,7 +27,7 @@ void setup() {
   Serial.println("------");
     
   for (int i = 2; i <= 9; i++)
-    pinMode(i, INPUT);
+    pinMode(i, INPUT_PULLUP);
     
   T.SetStopTime(7200);
   T.StartTimer();
@@ -58,7 +58,7 @@ void loop() {
       nextNote++;
     }
     
-    if (digitalRead(8) == HIGH) {
+    if (!digitalRead(8) == HIGH) {
       if (!last[8]) {
         last[8] = true;
         int delta = -(testSong[nextNote] - curTime);
