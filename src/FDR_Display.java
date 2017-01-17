@@ -16,10 +16,8 @@ public class FDR_Display {
 	// Game Variables
 	static final String TITLE = "Finger Dance Revolution";
 	static int width = 600, height = 480, panelWidth, panelHeight;
-	static int fps, fpsProc = 0, tps = 60, curTps;
 
 	static String commands = "";
-	static boolean processed = false;
 
 	static final int[] xCOORDS = { 0, 0, 50, 100, 150, 200, 360, 410, 460, 510 };
 	static final int TEXTLOC = 250;
@@ -28,7 +26,6 @@ public class FDR_Display {
 
 	static JPanel gamePanel;
 	static JFrame frame;
-	static boolean running;
 
 	static BufferedImage sprLeft, sprRight, sprTop, sprDown;
 	static BufferedImage sprLeftB, sprRightB, sprTopB, sprDownB;
@@ -49,31 +46,23 @@ public class FDR_Display {
 		sprDownB = ImageIO.read(new File("DownBlank.png"));
 
 		serial = new File("/dev/ttyAMA0");
-		s = new BufferedReader(new InputStreamReader(new FileInputStream(serial)), 1);
+		s = new BufferedReader(new InputStreamReader(new FileInputStream(serial)));
 
 		// Start Game
-		running = true;
 		createWindow();
 
 		// Game Loop
-		long lastTime = System.nanoTime(), timer = System.currentTimeMillis();
-		double ns = 1000000000 / (double) tps, delta = 0;
-		int tpsProc = 0;
 		new Thread() {
 			public void run() {
 				while (true) {
 					try {
-						if (processed) {
-							commands = "";
-							processed = false;
-						}
 						commands += s.readLine();
 					} catch (Exception e) {
 					}
 				}
 			}
 		}.start();
-		while (running) {
+		while (true) {
 			gamePanel.repaint();
 			Thread.sleep(1);
 		}
@@ -100,7 +89,6 @@ public class FDR_Display {
 					render(g);
 				} catch (Exception e) {
 				}
-				fpsProc++;
 			}
 		};
 
@@ -112,17 +100,9 @@ public class FDR_Display {
 	}
 
 	static void render(Graphics g) throws Exception {
-
 		int textY = 0, textIncY = 20;
 
-		// Draw Debug
-		g.setColor(Color.black);
-		g.drawString("FPS: " + fps, TEXTLOC, textY += textIncY);
-		g.drawString("TPS: " + tps, TEXTLOC, textY += textIncY);
-
 		// Render Game
-		// g.setColor(Color.magenta);
-		// g.drawLine(0, 209, width, 209);
 		g.drawImage(sprLeftB, xCOORDS[2], 210, null);
 		g.drawImage(sprTopB, xCOORDS[3], 210, null);
 		g.drawImage(sprDownB, xCOORDS[4], 210, null);
@@ -172,7 +152,7 @@ public class FDR_Display {
 			}
 		}
 
-		processed = true;
+		commands = "";
 
 		g.drawString("Player 1: " + p1Score, TEXTLOC, textY += textIncY);
 		g.drawString("Player 2: " + p2Score, TEXTLOC, textY += textIncY);
