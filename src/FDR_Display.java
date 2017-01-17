@@ -17,8 +17,8 @@ public class FDR_Display {
 	static int fps, fpsProc = 0, tps = 60, curTps;
 
 	static String commands = "";
-	static boolean processed = false;	
-	
+	static boolean processed = false;
+
 	static final int[] xCOORDS = { 0, 0, 50, 100, 150, 200, 360, 410, 460, 510 };
 	static final int TEXTLOC = 250;
 	static int p1Score = 0, p2Score = 0;
@@ -30,7 +30,7 @@ public class FDR_Display {
 
 	static BufferedImage sprLeft, sprRight, sprTop, sprDown;
 	static BufferedImage sprLeftB, sprRightB, sprTopB, sprDownB;
-	
+
 	static File serial;
 	static Scanner s;
 
@@ -45,10 +45,10 @@ public class FDR_Display {
 		sprRightB = ImageIO.read(new File("RightBlank.png"));
 		sprTopB = ImageIO.read(new File("TopBlank.png"));
 		sprDownB = ImageIO.read(new File("DownBlank.png"));
-		
+
 		serial = new File("/dev/ttyAMA0");
 		s = new Scanner(serial);
-		
+
 		// Start Game
 		running = true;
 		createWindow();
@@ -57,10 +57,12 @@ public class FDR_Display {
 		long lastTime = System.nanoTime(), timer = System.currentTimeMillis();
 		double ns = 1000000000 / (double) tps, delta = 0;
 		int tpsProc = 0;
-		new Thread(){
+		new Thread() {
 			public void run() {
-				commands = s.nextLine();
-				System.out.println(commands);
+				while (true) {
+					commands = s.nextLine();
+					System.out.println(commands);
+				}
 			}
 		}.start();
 		while (running) {
@@ -116,17 +118,17 @@ public class FDR_Display {
 	}
 
 	static void render(Graphics g) {
-		
+
 		int textY = 0, textIncY = 20;
-		
+
 		// Draw Debug
 		g.setColor(Color.black);
 		g.drawString("FPS: " + fps, TEXTLOC, textY += textIncY);
 		g.drawString("TPS: " + tps, TEXTLOC, textY += textIncY);
 
 		// Render Game
-		//g.setColor(Color.magenta);
-		//g.drawLine(0, 209, width, 209);
+		// g.setColor(Color.magenta);
+		// g.drawLine(0, 209, width, 209);
 		g.drawImage(sprLeftB, xCOORDS[2], 210, null);
 		g.drawImage(sprTopB, xCOORDS[3], 210, null);
 		g.drawImage(sprDownB, xCOORDS[4], 210, null);
@@ -135,7 +137,7 @@ public class FDR_Display {
 		g.drawImage(sprTopB, xCOORDS[7], 210, null);
 		g.drawImage(sprDownB, xCOORDS[8], 210, null);
 		g.drawImage(sprRightB, xCOORDS[9], 210, null);
-		
+
 		String[] cmdList = commands.split("\\+");
 		for (String cmd : cmdList) {
 			String[] proc = cmd.split(":");
@@ -175,9 +177,9 @@ public class FDR_Display {
 				p2Score = y;
 			}
 		}
-		
+
 		processed = true;
-		
+
 		g.drawString("Player 1: " + p1Score, TEXTLOC, textY += textIncY);
 		g.drawString("Player 2: " + p2Score, TEXTLOC, textY += textIncY);
 		g.drawString("Song Time: ", TEXTLOC, textY += textIncY);
