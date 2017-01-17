@@ -98,7 +98,7 @@ public class FDR_Display {
 				g.setColor(Color.lightGray);
 				g.fillRect(0, 0, getWidth(), getHeight());
 				// Render Game
-				render(g);
+				//render(g);
 				fpsProc++;
 			}
 		};
