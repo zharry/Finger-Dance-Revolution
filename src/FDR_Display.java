@@ -2,8 +2,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
-import java.util.Scanner;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -32,7 +34,7 @@ public class FDR_Display {
 	static BufferedImage sprLeftB, sprRightB, sprTopB, sprDownB;
 
 	static File serial;
-	static Scanner s;
+	static BufferedReader s;
 
 	public static void main(String[] args) throws Exception {
 
@@ -47,7 +49,7 @@ public class FDR_Display {
 		sprDownB = ImageIO.read(new File("DownBlank.png"));
 
 		serial = new File("/dev/ttyAMA0");
-		s = new Scanner(serial);
+		s = new BufferedReader(new InputStreamReader(new FileInputStream(serial)), 1);
 
 		// Start Game
 		running = true;
@@ -60,30 +62,28 @@ public class FDR_Display {
 		new Thread() {
 			public void run() {
 				while (true) {
-					commands = s.nextLine();
-					System.out.println(commands);
+					try {
+						commands = s.readLine();
+						System.out.println(commands);
+					} catch (Exception e) {
+
+					}
 				}
 			}
 		}.start();
 		while (running) {
-			/*long curTime = System.nanoTime();
-			delta += (curTime - lastTime) / ns;
-			lastTime = curTime;
-			while (delta >= 1) {
-				// Process Game Changes
-				tpsProc++;
-				delta--;
-			}*/
+			/*
+			 * long curTime = System.nanoTime(); delta += (curTime - lastTime) /
+			 * ns; lastTime = curTime; while (delta >= 1) { // Process Game
+			 * Changes tpsProc++; delta--; }
+			 */
 			// Update the Graphics
 			gamePanel.repaint();/*
-			// Display FPS and TPS
-			if (System.currentTimeMillis() - timer > 1000) {
-				timer += 1000;
-				fps = fpsProc;
-				curTps = tpsProc;
-				fpsProc = 0;
-				tpsProc = 0;
-			}*/
+								 * // Display FPS and TPS if
+								 * (System.currentTimeMillis() - timer > 1000) {
+								 * timer += 1000; fps = fpsProc; curTps =
+								 * tpsProc; fpsProc = 0; tpsProc = 0; }
+								 */
 			Thread.sleep(1);
 		}
 	}
