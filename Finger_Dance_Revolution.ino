@@ -85,9 +85,6 @@ void loop() {
   Serial.print(scoreP2);
   Serial.print("+");
   Serial.println();
-
-  Serial.flush();
-
     
   // Player 1
   for (int i = 2; i < 6; i++) {

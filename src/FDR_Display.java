@@ -63,27 +63,18 @@ public class FDR_Display {
 			public void run() {
 				while (true) {
 					try {
-						commands = s.readLine();
-						//System.out.println(commands);
+						if(processed) {
+							commands = "";
+							processed = false;
+						}
+						commands += s.readLine();
 					} catch (Exception e) {
-
 					}
 				}
 			}
 		}.start();
 		while (running) {
-			/*
-			 * long curTime = System.nanoTime(); delta += (curTime - lastTime) /
-			 * ns; lastTime = curTime; while (delta >= 1) { // Process Game
-			 * Changes tpsProc++; delta--; }
-			 */
-			// Update the Graphics
-			gamePanel.repaint();/*
-								 * // Display FPS and TPS if
-								 * (System.currentTimeMillis() - timer > 1000) {
-								 * timer += 1000; fps = fpsProc; curTps =
-								 * tpsProc; fpsProc = 0; tpsProc = 0; }
-								 */
+			gamePanel.repaint();
 			Thread.sleep(1);
 		}
 	}
@@ -105,7 +96,10 @@ public class FDR_Display {
 				g.setColor(Color.lightGray);
 				g.fillRect(0, 0, getWidth(), getHeight());
 				// Render Game
-				render(g);
+				try {
+					render(g);
+				} catch (Exception e) {
+				}
 				fpsProc++;
 			}
 		};
@@ -117,7 +111,7 @@ public class FDR_Display {
 		panelHeight = gamePanel.getHeight();
 	}
 
-	static void render(Graphics g) {
+	static void render(Graphics g) throws Exception {
 
 		int textY = 0, textIncY = 20;
 
@@ -163,6 +157,7 @@ public class FDR_Display {
 				System.out.println("Game Over!");
 				System.out.println("Player 1: " + button);
 				System.out.println("Player 2: " + y);
+				Thread.sleep(100000L);
 			} else if (c.equals("DPA")) {
 				System.out.println("Double Points " + button);
 			} else if (c.equals("FPA")) {
