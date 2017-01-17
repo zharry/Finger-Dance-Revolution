@@ -57,6 +57,12 @@ public class FDR_Display {
 		long lastTime = System.nanoTime(), timer = System.currentTimeMillis();
 		double ns = 1000000000 / (double) tps, delta = 0;
 		int tpsProc = 0;
+		new Thread(){
+			public void run() {
+				commands = s.nextLine();
+				System.out.println(commands);
+			}
+		}.start();
 		while (running) {
 			long curTime = System.nanoTime();
 			delta += (curTime - lastTime) / ns;
@@ -110,8 +116,6 @@ public class FDR_Display {
 	}
 
 	static void render(Graphics g) {
-		commands = s.nextLine();
-		System.out.println(commands);
 		
 		int textY = 0, textIncY = 20;
 		
