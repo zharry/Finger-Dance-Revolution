@@ -29,7 +29,7 @@ unsigned int songOver = 0;
 void setup() {
   Serial.begin(115200);
   pinMode(13, OUTPUT);
-  Serial.println("SS");
+  Serial.println("SS:0,0+");
     
   for (int i = 2; i <= 9; i++)
     pinMode(i, INPUT_PULLUP);

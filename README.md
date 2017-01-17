@@ -22,9 +22,11 @@ Grade 11, Computer Engineering Summative. Two player DDR except played with your
 	 * 			If it's CT
 	 * 				- button represents the current time
 	 * 				- y is not processed
-     *      If it's SC
-     *        - button represents Player 1 score
-     *        - y represents Player 2 score
+     *          If it's SC
+     *              - button represents Player 1 score
+     *              - y represents Player 2 score
+     *          If it's SS
+     *              - both btton and y are not processed
 	 */
 	 
 ### Quick Launch Raspberry Pi Command

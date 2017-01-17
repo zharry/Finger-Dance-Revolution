@@ -16,7 +16,7 @@ public class FDR_Display {
 	static int width = 600, height = 480, panelWidth, panelHeight;
 	static int fps, fpsProc = 0, tps = 60, curTps;
 
-	static String commands = "R:5,215+CT:34464,0+SC:100,0+";
+	static String commands = "\n\n\n\n\n\n\n\n";
 	static boolean processed = false;	
 	
 	static final int[] xCOORDS = { 0, 0, 50, 100, 150, 200, 360, 410, 460, 510 };
@@ -98,7 +98,7 @@ public class FDR_Display {
 				g.setColor(Color.lightGray);
 				g.fillRect(0, 0, getWidth(), getHeight());
 				// Render Game
-				render(g);
+				//render(g);
 				fpsProc++;
 			}
 		};
