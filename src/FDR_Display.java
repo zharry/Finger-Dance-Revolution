@@ -110,10 +110,8 @@ public class FDR_Display {
 	}
 
 	static void render(Graphics g) {
-		commands = "";
-		while(s.hasNext()) {
 		commands = s.nextLine();
-		}		System.out.println(commands);
+		System.out.println(commands);
 		
 		int textY = 0, textIncY = 20;
 		
