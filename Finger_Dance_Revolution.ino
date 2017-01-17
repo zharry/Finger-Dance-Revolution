@@ -47,7 +47,8 @@ void loop() {
     Serial.print("SO:");
     Serial.print(scoreP1);
     Serial.print(",");
-    Serial.print(scoreP2);
+    Serial.println(scoreP2);
+    Serial.println();
     while (true)
       delay(1000);
   }
@@ -118,25 +119,21 @@ void loop() {
             Serial.print("DPA:");
             Serial.print(i);
             Serial.print(",0+");
-            Serial.println();
             scoreP1 += ppc * 2;
           } else if (deltaVal <= fullPoints) {
             Serial.print("FPA:");
             Serial.print(i);
             Serial.print(",0+");
-            Serial.println();
             scoreP1 += ppc;
           } else if (deltaVal <= halfPoints) {
             Serial.print("HPA:");
             Serial.print(i);
             Serial.print(",0+");
-            Serial.println();
             scoreP1 += ppc / 2;
           } else if (deltaVal <= noPoints) {
             Serial.print("NPA:");
             Serial.print(i);
             Serial.print(",0+");
-            Serial.println();
           } else {
             // Not avaliable yet
             nextNote[i]--;
@@ -179,25 +176,21 @@ void loop() {
             Serial.print("DPA:");
             Serial.print(i);
             Serial.print(",0+");
-            Serial.println();
             scoreP2 += ppc * 2;
           } else if (deltaVal <= fullPoints) {
             Serial.print("FPA:");
             Serial.print(i);
             Serial.print(",0+");
-            Serial.println();
             scoreP2 += ppc;
           } else if (deltaVal <= halfPoints) {
             Serial.print("HPA:");
             Serial.print(i);
             Serial.print(",0+");
-            Serial.println();
             scoreP2 += ppc / 2;
           } else if (deltaVal <= noPoints) {
             Serial.print("NPA:");
             Serial.print(i);
             Serial.print(",0+");
-            Serial.println();
           } else {
             // Not avaliable yet
             nextNote[i]--;
@@ -207,19 +200,6 @@ void loop() {
         last[i] = false; 
     }
   }
-  
+
   delay(1000 / 250);
 }
-
-void displayDebug(int i, int a, unsigned long curNote, unsigned long curTime) {
-  Serial.print(" CB:"); // Current Button
-  Serial.print(i);
-  Serial.print(" CN:"); // Current Note
-  Serial.print(nextNote[i]);
-  Serial.print(" T:"); // Expected Time
-  Serial.print(curNote);        
-  Serial.print(" @ "); // Current Time
-  Serial.print(curTime);
-}
-
-	

@@ -63,7 +63,6 @@ public class FDR_Display {
 			lastTime = curTime;
 			while (delta >= 1) {
 				// Process Game Changes
-				tick();
 				tpsProc++;
 				delta--;
 			}
@@ -98,7 +97,7 @@ public class FDR_Display {
 				g.setColor(Color.lightGray);
 				g.fillRect(0, 0, getWidth(), getHeight());
 				// Render Game
-				//render(g);
+				render(g);
 				fpsProc++;
 			}
 		};
@@ -110,19 +109,10 @@ public class FDR_Display {
 		panelHeight = gamePanel.getHeight();
 	}
 
-	static void tick() {
-		/*if (processed) {
-			commands = "";
-			processed = false;
-		}*/
-		while(s.hasNext()) {
-			System.out.println(s.nextLine());
-			//commands += s.nextLine();
-		}
-		//System.out.println(commands);
-	}
-
 	static void render(Graphics g) {
+		commands = s.nextLine();
+		System.out.println(commands);
+		
 		int textY = 0, textIncY = 20;
 		
 		// Draw Debug
