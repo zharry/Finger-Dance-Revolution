@@ -19,7 +19,7 @@ const uint32_t testSong[][testSongSize] PROGMEM = {
   {2000, 4000, 18000},     // 2 & 6
   {6000, 8000, 20000},     // 3 & 7
   {10000, 12000, 18000},   // 4 & 8
-  {14000, 16000, 34000} }; // 5 & 9
+  {14000, 16000, 25000} }; // 5 & 9
 unsigned int nextNote[10];
 bool doneNote[10];
 unsigned int scoreP1 = 0;
@@ -195,7 +195,7 @@ void loop() {
     Serial.print("SO:");
     Serial.print(scoreP1);
     Serial.print(",");
-    Serial.print(scoreP2);
+    Serial.println(scoreP2);
     while (true)
       delay(1000);
   }
