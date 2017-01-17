@@ -12,11 +12,12 @@ public class FDR_Display {
 
 	// Game Variables
 	static final String TITLE = "Finger Dance Revolution";
-	static int width = 800, height = 480, panelWidth, panelHeight;
+	static int width = 600, height = 480, panelWidth, panelHeight;
 	static int fps, fpsProc = 0, tps = 60, curTps;
 
 	static String commands = "R:5,215+CT:34464,0+SC:100,0+";
-	static final int[] xCOORDS = { 0, 0, 50, 100, 150, 200, 560, 610, 660, 710 };
+	static final int[] xCOORDS = { 0, 0, 50, 100, 150, 200, 360, 410, 460, 510 };
+	static final int TEXTLOC = 250;
 	static int p1Score = 0, p2Score = 0;
 
 	static JPanel gamePanel;
@@ -107,7 +108,7 @@ public class FDR_Display {
 	static void render(Graphics g) {
 		// Draw Debug
 		g.setColor(Color.black);
-		g.drawString("FPS: " + fps + " TPS: " + tps, 320, 20);
+		g.drawString("FPS: " + fps + " TPS: " + tps, TEXTLOC, 20);
 
 		// Render Game
 		//g.setColor(Color.magenta);
@@ -140,7 +141,7 @@ public class FDR_Display {
 				g.setColor(Color.black);
 				int mili = button % 1000;
 				int seconds = button / 1000;
-				g.drawString("Song Time: " + seconds + ":" + mili, 320, 40);
+				g.drawString("Song Time: " + seconds + ":" + mili, TEXTLOC, 40);
 			} else if (c.equals("MN")) {
 				System.out.println("Missed " + button);
 			} else if (c.equals("SO")) {
@@ -159,8 +160,8 @@ public class FDR_Display {
 				g.setColor(Color.black);
 				p1Score = button;
 				p2Score = y;
-				g.drawString("Player 1: " + p1Score, 320, 60);
-				g.drawString("Player 2: " + p2Score, 320, 80);
+				g.drawString("Player 1: " + p1Score, TEXTLOC, 60);
+				g.drawString("Player 2: " + p2Score, TEXTLOC, 80);
 			}
 		}
 
