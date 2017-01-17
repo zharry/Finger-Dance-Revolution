@@ -111,16 +111,15 @@ public class FDR_Display {
 	}
 
 	static void tick() {
-		//if (processed) {
-			//commands = "";
-			//processed = false;
-		//}
+		/*if (processed) {
+			commands = "";
+			processed = false;
+		}*/
 		while(s.hasNext()) {
 			System.out.println(s.nextLine());
-//			commands += s.nextLine();
+			//commands += s.nextLine();
 		}
-//		commands = commands.replaceAll("\n", "");
-//		System.out.println(commands);
+		//System.out.println(commands);
 	}
 
 	static void render(Graphics g) {
