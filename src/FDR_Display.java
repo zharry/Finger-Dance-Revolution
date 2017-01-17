@@ -59,11 +59,12 @@ public class FDR_Display {
 			public void run() {
 				while (true) {
 					try {
-						if (processed) {
-							commands = "";
-							processed = false;
-						}
-						commands += s.readLine();
+						//if (processed) {
+						//	commands = "";
+						//	processed = false;
+						//}
+						commands = s.readLine();
+						System.out.println(commands);
 					} catch (Exception e) {
 					}
 				}
