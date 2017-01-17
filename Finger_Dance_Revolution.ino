@@ -177,7 +177,7 @@ void loop() {
             Serial.print(5 + i);
           }
           Serial.print(",");
-          Serial.print(map(delta, -500, 500, 451, -31));
+          Serial.print(map(delta, -500, 500, 480, -31));
           Serial.print("+");
         }
       }

@@ -18,6 +18,7 @@ public class FDR_Display {
 	static int width = 600, height = 480, panelWidth, panelHeight;
 
 	static String commands = "";
+	static boolean processed = false;
 
 	static final int[] xCOORDS = { 0, 0, 50, 100, 150, 200, 360, 410, 460, 510 };
 	static final int TEXTLOC = 250;
@@ -26,6 +27,7 @@ public class FDR_Display {
 
 	static JPanel gamePanel;
 	static JFrame frame;
+	static boolean running;
 
 	static BufferedImage sprLeft, sprRight, sprTop, sprDown;
 	static BufferedImage sprLeftB, sprRightB, sprTopB, sprDownB;
@@ -49,6 +51,7 @@ public class FDR_Display {
 		s = new BufferedReader(new InputStreamReader(new FileInputStream(serial)));
 
 		// Start Game
+		running = true;
 		createWindow();
 
 		// Game Loop
@@ -56,13 +59,17 @@ public class FDR_Display {
 			public void run() {
 				while (true) {
 					try {
+						if (processed) {
+							commands = "";
+							processed = false;
+						}
 						commands += s.readLine();
 					} catch (Exception e) {
 					}
 				}
 			}
 		}.start();
-		while (true) {
+		while (running) {
 			gamePanel.repaint();
 			Thread.sleep(1);
 		}
@@ -152,7 +159,7 @@ public class FDR_Display {
 			}
 		}
 
-		commands = "";
+		processed = true;
 
 		g.drawString("Player 1: " + p1Score, TEXTLOC, textY += textIncY);
 		g.drawString("Player 2: " + p2Score, TEXTLOC, textY += textIncY);
