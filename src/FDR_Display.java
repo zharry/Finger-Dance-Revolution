@@ -63,7 +63,7 @@ public class FDR_Display {
 			public void run() {
 				while (true) {
 					try {
-						if(processed) {
+						if (processed) {
 							commands = "";
 							processed = false;
 						}
@@ -157,7 +157,6 @@ public class FDR_Display {
 				System.out.println("Game Over!");
 				System.out.println("Player 1: " + button);
 				System.out.println("Player 2: " + y);
-				Thread.sleep(100000L);
 			} else if (c.equals("DPA")) {
 				System.out.println("Double Points " + button);
 			} else if (c.equals("FPA")) {

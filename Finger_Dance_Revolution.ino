@@ -42,49 +42,6 @@ void loop() {
   digitalWrite(13, HIGH);
   T.Timer(); // run the timer
   unsigned long curTime = T.ShowMilliSeconds();
-
-  if (songOver >= 8) {
-    Serial.print("SO:");
-    Serial.print(scoreP1);
-    Serial.print(",");
-    Serial.println(scoreP2);
-    Serial.println();
-    while (true)
-      delay(1000);
-  }
-  
-  for (int y = 0; y < 4; y++) {
-    for (int z = 0; z < testSongSize; z++) {
-      unsigned long curNote = pgm_read_dword(&testSong[y][z]);
-      long delta = curTime - curNote;
-      if (abs(delta) <= 500) {
-        if (y == 0) {
-          Serial.print("L:");
-          Serial.print(2);
-        } else if (y == 1) {
-          Serial.print("T:");
-          Serial.print(3);
-        } else if (y == 2) {
-          Serial.print("B:");
-          Serial.print(4);
-        } else if (y == 3) {
-          Serial.print("R:");
-          Serial.print(5);
-        }
-        Serial.print(",");
-        Serial.print(map(delta, -500, 500, 451, -31));
-        Serial.print("+");
-      }
-    }
-  }
-  Serial.print("CT:");
-  Serial.print(curTime);
-  Serial.print(",0+SC:");
-  Serial.print(scoreP1);
-  Serial.print(",");
-  Serial.print(scoreP2);
-  Serial.print("+");
-  Serial.println();
     
   // Player 1
   for (int i = 2; i < 6; i++) {
@@ -199,6 +156,50 @@ void loop() {
         last[i] = false; 
     }
   }
+  
+  for (int y = 0; y < 4; y++) {
+    for (int z = 0; z < testSongSize; z++) {
+      unsigned long curNote = pgm_read_dword(&testSong[y][z]);
+      long delta = curTime - curNote;
+      if (abs(delta) <= 500) {
+        for (int i = 0; i <= 4; i += 4) {
+          if (y == 0) {
+            Serial.print("L:");
+            Serial.print(2 + i);
+          } else if (y == 1) {
+            Serial.print("T:");
+            Serial.print(3 + i);
+          } else if (y == 2) {
+            Serial.print("B:");
+            Serial.print(4 + i);
+          } else if (y == 3) {
+            Serial.print("R:");
+            Serial.print(5 + i);
+          }
+          Serial.print(",");
+          Serial.print(map(delta, -500, 500, 451, -31));
+          Serial.print("+");
+        }
+      }
+    }
+  }
+  Serial.print("CT:");
+  Serial.print(curTime);
+  Serial.print(",0+SC:");
+  Serial.print(scoreP1);
+  Serial.print(",");
+  Serial.print(scoreP2);
+  Serial.print("+");
+
+  if (songOver >= 8) {
+    Serial.print("SO:");
+    Serial.print(scoreP1);
+    Serial.print(",");
+    Serial.print(scoreP2);
+    while (true)
+      delay(1000);
+  }
+  Serial.println();
 
   delay(1000 / 250);
 }
