@@ -64,7 +64,6 @@ public class FDR_Display {
 						//	processed = false;
 						//}
 						commands = s.readLine();
-						System.out.println(commands);
 					} catch (Exception e) {
 					}
 				}
@@ -120,6 +119,7 @@ public class FDR_Display {
 		g.drawImage(sprDownB, xCOORDS[8], 210, null);
 		g.drawImage(sprRightB, xCOORDS[9], 210, null);
 
+		System.out.println(commands);
 		String[] cmdList = commands.split("\\+");
 		for (String cmd : cmdList) {
 			String[] proc = cmd.split(":");
