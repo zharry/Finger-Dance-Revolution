@@ -19,6 +19,7 @@ public class FDR_Display {
 	static final int[] xCOORDS = { 0, 0, 50, 100, 150, 200, 360, 410, 460, 510 };
 	static final int TEXTLOC = 250;
 	static int p1Score = 0, p2Score = 0;
+	static int mili = 0, seconds = 0;
 
 	static JPanel gamePanel;
 	static JFrame frame;
@@ -106,9 +107,12 @@ public class FDR_Display {
 	}
 
 	static void render(Graphics g) {
+		int textY = 0, textIncY = 20;
+		
 		// Draw Debug
 		g.setColor(Color.black);
-		g.drawString("FPS: " + fps + " TPS: " + tps, TEXTLOC, 20);
+		g.drawString("FPS: " + fps, TEXTLOC, textY += textIncY);
+		g.drawString("TPS: " + tps, TEXTLOC, textY += textIncY);
 
 		// Render Game
 		//g.setColor(Color.magenta);
@@ -139,9 +143,8 @@ public class FDR_Display {
 				g.drawImage(sprDown, xCOORDS[button], y, null);
 			} else if (c.equals("CT")) {
 				g.setColor(Color.black);
-				int mili = button % 1000;
-				int seconds = button / 1000;
-				g.drawString("Song Time: " + seconds + ":" + mili, TEXTLOC, 40);
+				mili = button % 1000;
+				seconds = button / 1000;
 			} else if (c.equals("MN")) {
 				System.out.println("Missed " + button);
 			} else if (c.equals("SO")) {
@@ -160,10 +163,13 @@ public class FDR_Display {
 				g.setColor(Color.black);
 				p1Score = button;
 				p2Score = y;
-				g.drawString("Player 1: " + p1Score, TEXTLOC, 60);
-				g.drawString("Player 2: " + p2Score, TEXTLOC, 80);
 			}
 		}
+		
+		g.drawString("Player 1: " + p1Score, TEXTLOC, textY += textIncY);
+		g.drawString("Player 2: " + p2Score, TEXTLOC, textY += textIncY);
+		g.drawString("Song Time: ", TEXTLOC, textY += textIncY);
+		g.drawString(seconds + ":" + mili, TEXTLOC, textY += textIncY);
 
 	}
 
