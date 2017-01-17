@@ -26,3 +26,6 @@ Grade 11, Computer Engineering Summative. Two player DDR except played with your
      *        - button represents Player 1 score
      *        - y represents Player 2 score
 	 */
+	 
+### Quick Launch Raspberry Pi Command
+export DISPLAY=:0 && cd /home/pi/Finger-Dance-Revolution && git pull && cp src/FDR_Display.java FDR_Display.java && javac FDR_Display.java && java FDR_Display
