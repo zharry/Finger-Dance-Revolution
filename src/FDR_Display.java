@@ -12,7 +12,7 @@ public class FDR_Display {
 
 	// Game Variables
 	static final String TITLE = "Finger Dance Revolution";
-	static int width = 800, height = 480, panelWidth, panelHeight;
+	static int width = 400, height = 480, panelWidth, panelHeight;
 	static int fps, fpsProc = 0, tps = 60, curTps;
 
 	static String commands = "R:5,215+CT:34464,0+SC:100,0+";
