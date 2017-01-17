@@ -16,7 +16,7 @@ public class FDR_Display {
 	static int width = 600, height = 480, panelWidth, panelHeight;
 	static int fps, fpsProc = 0, tps = 60, curTps;
 
-	static String commands = "\n\n\n\n\n\n\n\n";
+	static String commands = "";
 	static boolean processed = false;	
 	
 	static final int[] xCOORDS = { 0, 0, 50, 100, 150, 200, 360, 410, 460, 510 };
@@ -111,14 +111,15 @@ public class FDR_Display {
 	}
 
 	static void tick() {
-		if (processed) {
+		/*if (processed) {
 			commands = "";
 			processed = false;
-		}
+		}*/
 		while(s.hasNext()) {
-			commands += s.nextLine();
+			System.out.println(s.nextLine());
+			//commands += s.nextLine();
 		}
-		System.out.println(commands);
+		//System.out.println(commands);
 	}
 
 	static void render(Graphics g) {

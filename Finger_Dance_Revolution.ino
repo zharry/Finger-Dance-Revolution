@@ -72,17 +72,19 @@ void loop() {
         }
         Serial.print(",");
         Serial.print(map(delta, -500, 500, 451, -31));
-        Serial.print("+CT:");
-        Serial.print(curTime);
-        Serial.print(",0+SC:");
-        Serial.print(scoreP1);
-        Serial.print(",");
-        Serial.print(scoreP2);
         Serial.print("+");
-        Serial.println();
       }
     }
   }
+  Serial.print("CT:");
+  Serial.print(curTime);
+  Serial.print(",0+SC:");
+  Serial.print(scoreP1);
+  Serial.print(",");
+  Serial.print(scoreP2);
+  Serial.print("+");
+  Serial.println();
+
     
   // Player 1
   for (int i = 2; i < 6; i++) {
