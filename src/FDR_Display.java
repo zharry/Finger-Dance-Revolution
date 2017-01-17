@@ -111,10 +111,10 @@ public class FDR_Display {
 	}
 
 	static void tick() {
-		if (processed) {
-			commands = "";
-			processed = false;
-		}
+		//if (processed) {
+			//commands = "";
+			//processed = false;
+		//}
 		while(s.hasNext()) {
 			commands += s.nextLine();
 		}
