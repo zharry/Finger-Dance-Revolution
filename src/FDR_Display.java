@@ -64,7 +64,7 @@ public class FDR_Display {
 				while (true) {
 					try {
 						commands = s.readLine();
-						System.out.println(commands);
+						//System.out.println(commands);
 					} catch (Exception e) {
 
 					}

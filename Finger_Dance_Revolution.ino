@@ -86,6 +86,8 @@ void loop() {
   Serial.print("+");
   Serial.println();
 
+  Serial.flush();
+
     
   // Player 1
   for (int i = 2; i < 6; i++) {
