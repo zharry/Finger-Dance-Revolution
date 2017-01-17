@@ -111,15 +111,14 @@ public class FDR_Display {
 	}
 
 	static void tick() {
-		/*if (processed) {
+		if (processed) {
 			commands = "";
 			processed = false;
-		}*/
-		while(s.hasNext()) {
-			System.out.println(s.nextLine());
-			//commands += s.nextLine();
 		}
-		//System.out.println(commands);
+		while(s.hasNext()) {
+			commands += s.nextLine();
+		}
+		System.out.println(commands);
 	}
 
 	static void render(Graphics g) {
@@ -128,7 +127,7 @@ public class FDR_Display {
 		// Draw Debug
 		g.setColor(Color.black);
 		g.drawString("FPS: " + fps, TEXTLOC, textY += textIncY);
-		g.drawString("TPS: " + tps, TEXTLOC, textY += textIncY);
+		g.drawString("TPS: " + curTps, TEXTLOC, textY += textIncY);
 
 		// Render Game
 		//g.setColor(Color.magenta);
