@@ -116,10 +116,11 @@ public class FDR_Display {
 			//processed = false;
 		//}
 		while(s.hasNext()) {
-			commands += s.nextLine();
+			System.out.println(s.nextLine());
+//			commands += s.nextLine();
 		}
-		commands = commands.replaceAll("\n", "");
-		System.out.println(commands);
+//		commands = commands.replaceAll("\n", "");
+//		System.out.println(commands);
 	}
 
 	static void render(Graphics g) {
