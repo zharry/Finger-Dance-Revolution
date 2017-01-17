@@ -8,6 +8,8 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import gnu.io.*;
+
 public class FDR_Display {
 
 	// Game Variables
@@ -39,12 +41,11 @@ public class FDR_Display {
 		sprRightB = ImageIO.read(new File("RightBlank.png"));
 		sprTopB = ImageIO.read(new File("TopBlank.png"));
 		sprDownB = ImageIO.read(new File("DownBlank.png"));
-		
+
 		// Start Game
 		running = true;
 		createWindow();
 
-		System.out.println(panelHeight);
 		// Game Loop
 		long lastTime = System.nanoTime(), timer = System.currentTimeMillis();
 		double ns = 1000000000 / (double) tps, delta = 0;
@@ -103,20 +104,32 @@ public class FDR_Display {
 	}
 
 	static void tick() {
-		
+		CommPortIdentifier portId = CommPortIdentifier.getPortIdentifier("/dev/ttyAMA0");
+		SerialPort serialPort = (SerialPort) portId.open("GPS application", 5000);
+		// Change baud rate if not 115200
+		serialPort.setSerialPortParams(115200, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+		serialPort.setFlowControlMode(SerialPort.FLOWCONTROL_NONE);
+		inStream = serialPort.getInputStream();
+		String reading = "";
+		while (true) {
+			if (inStream.available() > 0) {
+				int b = inStream.read();
+				System.out.print((char) b);
+			}
+		}
 	}
 
 	static void render(Graphics g) {
 		int textY = 0, textIncY = 20;
-		
+
 		// Draw Debug
 		g.setColor(Color.black);
 		g.drawString("FPS: " + fps, TEXTLOC, textY += textIncY);
 		g.drawString("TPS: " + tps, TEXTLOC, textY += textIncY);
 
 		// Render Game
-		//g.setColor(Color.magenta);
-		//g.drawLine(0, 209, width, 209);
+		// g.setColor(Color.magenta);
+		// g.drawLine(0, 209, width, 209);
 		g.drawImage(sprLeftB, xCOORDS[2], 210, null);
 		g.drawImage(sprTopB, xCOORDS[3], 210, null);
 		g.drawImage(sprDownB, xCOORDS[4], 210, null);
@@ -125,7 +138,7 @@ public class FDR_Display {
 		g.drawImage(sprTopB, xCOORDS[7], 210, null);
 		g.drawImage(sprDownB, xCOORDS[8], 210, null);
 		g.drawImage(sprRightB, xCOORDS[9], 210, null);
-		
+
 		String[] cmdList = commands.split("\\+");
 		for (String cmd : cmdList) {
 			String[] proc = cmd.split(":");
@@ -165,7 +178,7 @@ public class FDR_Display {
 				p2Score = y;
 			}
 		}
-		
+
 		g.drawString("Player 1: " + p1Score, TEXTLOC, textY += textIncY);
 		g.drawString("Player 2: " + p2Score, TEXTLOC, textY += textIncY);
 		g.drawString("Song Time: ", TEXTLOC, textY += textIncY);
