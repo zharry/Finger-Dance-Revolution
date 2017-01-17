@@ -118,6 +118,7 @@ public class FDR_Display {
 		while(s.hasNext()) {
 			commands += s.nextLine();
 		}
+		commands = commands.replaceAll("\n", "");
 		System.out.println(commands);
 	}
 
