@@ -66,16 +66,16 @@ public class FDR_Display {
 			}
 		}.start();
 		while (running) {
-			long curTime = System.nanoTime();
+			/*long curTime = System.nanoTime();
 			delta += (curTime - lastTime) / ns;
 			lastTime = curTime;
 			while (delta >= 1) {
 				// Process Game Changes
 				tpsProc++;
 				delta--;
-			}
+			}*/
 			// Update the Graphics
-			gamePanel.repaint();
+			gamePanel.repaint();/*
 			// Display FPS and TPS
 			if (System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
@@ -83,7 +83,7 @@ public class FDR_Display {
 				curTps = tpsProc;
 				fpsProc = 0;
 				tpsProc = 0;
-			}
+			}*/
 			Thread.sleep(1);
 		}
 	}
