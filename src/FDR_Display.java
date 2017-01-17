@@ -3,6 +3,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -16,6 +17,8 @@ public class FDR_Display {
 	static int fps, fpsProc = 0, tps = 60, curTps;
 
 	static String commands = "R:5,215+CT:34464,0+SC:100,0+";
+	static boolean processed = false;	
+	
 	static final int[] xCOORDS = { 0, 0, 50, 100, 150, 200, 360, 410, 460, 510 };
 	static final int TEXTLOC = 250;
 	static int p1Score = 0, p2Score = 0;
@@ -27,6 +30,9 @@ public class FDR_Display {
 
 	static BufferedImage sprLeft, sprRight, sprTop, sprDown;
 	static BufferedImage sprLeftB, sprRightB, sprTopB, sprDownB;
+	
+	static File serial;
+	static Scanner s;
 
 	public static void main(String[] args) throws Exception {
 
@@ -39,6 +45,9 @@ public class FDR_Display {
 		sprRightB = ImageIO.read(new File("RightBlank.png"));
 		sprTopB = ImageIO.read(new File("TopBlank.png"));
 		sprDownB = ImageIO.read(new File("DownBlank.png"));
+		
+		serial = new File("/dev/ttyAMA0");
+		s = new Scanner(serial);
 		
 		// Start Game
 		running = true;
@@ -102,7 +111,14 @@ public class FDR_Display {
 	}
 
 	static void tick() {
-		
+		if (processed) {
+			commands = "";
+			processed = false;
+		}
+		while(s.hasNext()) {
+			commands += s.nextLine();
+		}
+		System.out.println(commands);
 	}
 
 	static void render(Graphics g) {
@@ -164,6 +180,8 @@ public class FDR_Display {
 				p2Score = y;
 			}
 		}
+		
+		processed = true;
 		
 		g.drawString("Player 1: " + p1Score, TEXTLOC, textY += textIncY);
 		g.drawString("Player 2: " + p2Score, TEXTLOC, textY += textIncY);
