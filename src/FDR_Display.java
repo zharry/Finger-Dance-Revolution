@@ -107,7 +107,7 @@ public class FDR_Display {
 							} else if (c.equals("SS")) {
 								gameOver = false;
 								Runtime.getRuntime().exec("pkill omxplayer");
-								ProcessBuilder pb = new ProcessBuilder("bash", "-c", "omxplayer -r -o hdmi myVideoFile.mp4");
+								ProcessBuilder pb = new ProcessBuilder("bash", "-c", "omxplayer -o local /home/pi/Finger-Dance-Revolution/Song.wav");
 								Process process = pb.start();
 							}
 						}
