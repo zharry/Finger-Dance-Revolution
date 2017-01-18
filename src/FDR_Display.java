@@ -102,6 +102,8 @@ public class FDR_Display {
 							} else if (c.equals("SC")) {
 								p1Score = button;
 								p2Score = y;
+							} else if (c.equals("SS")) {
+								gameOver = false;
 							}
 						}
 					} catch (Exception e) {
