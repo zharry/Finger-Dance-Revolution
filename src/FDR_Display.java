@@ -117,7 +117,7 @@ public class FDR_Display {
 								p2Score = y;
 							} else if (c.equals("SS")) {
 								gameOver = false;
-								clip.stop();
+								clip.setFramePosition(0);
 							    clip.start();
 							}
 						}
