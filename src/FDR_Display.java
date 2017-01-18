@@ -67,6 +67,7 @@ public class FDR_Display {
 	    clip.open(stream);
 
 		serial = new File("/dev/ttyAMA0");
+		//serial = new File("Test");
 		s = new BufferedReader(new InputStreamReader(new FileInputStream(serial)), 8);
 
 		// Start Game
