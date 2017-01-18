@@ -59,10 +59,11 @@ public class FDR_Display {
 		// Game Loop
 		new Thread() {
 			public void run() {
-				int c;
 				try {
-					while((c = s.read()) != -1) {
-					    System.out.print((char)c);
+					byte[] buffer = new byte[1024];
+					int c;
+					while((c = s.read(buffer, 0, 1024)) != -1) {
+					    System.out.print(new String(buffer, 0, c));
 					}
 				} catch (IOException e) {
 				}
