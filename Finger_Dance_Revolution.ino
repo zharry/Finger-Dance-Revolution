@@ -16,10 +16,10 @@ const int ppc = 100; // Points Per Click
 // Songs
 const int songSize = 3;
 const uint32_t song[][songSize] PROGMEM = { 
-  {2000, 4000, 18000},     // 2 & 6
-  {6000, 8000, 20000},     // 3 & 7
-  {10000, 12000, 18000},   // 4 & 8
-  {14000, 16000, 25000} }; // 5 & 9
+  {11750, 16350, 20950},     // 2 & 6
+                                        {9450, 14050, 18650},     // 3 & 7
+                                        {10600, 15200, 19800},   // 4 & 8
+                                                                                          {12900, 17500, 22100} }; // 5 & 9
 unsigned int nextNote[10];
 bool doneNote[10];
 unsigned int scoreP1 = 0;

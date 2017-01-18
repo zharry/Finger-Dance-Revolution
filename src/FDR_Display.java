@@ -61,7 +61,7 @@ public class FDR_Display {
 		sprTopB = ImageIO.read(new File("TopBlank.png"));
 		sprDownB = ImageIO.read(new File("DownBlank.png"));
 
-		music = new File("Song.wav");
+		music = new File("Song1.wav");
 		AudioInputStream stream = AudioSystem.getAudioInputStream(music);
 		clip = AudioSystem.getClip();
 	    clip.open(stream);
