@@ -14,8 +14,8 @@ const int noPoints = 500;
 const int ppc = 100; // Points Per Click
 
 // Songs
-const int testSongSize = 3;
-const uint32_t testSong[][testSongSize] PROGMEM = { 
+const int songSize = 3;
+const uint32_t song[][songSize] PROGMEM = { 
   {2000, 4000, 18000},     // 2 & 6
   {6000, 8000, 20000},     // 3 & 7
   {10000, 12000, 18000},   // 4 & 8
@@ -46,13 +46,13 @@ void loop() {
   // Player 1
   for (int i = 2; i < 6; i++) {
     int a = i - 2;
-    if (nextNote[i] >= testSongSize) {
+    if (nextNote[i] >= songSize) {
       if (!doneNote[i]) {
         songOver++;
         doneNote[i] = true;
       }
     } else { 
-      unsigned long curNote = pgm_read_dword(&testSong[a][nextNote[i]]);
+      unsigned long curNote = pgm_read_dword(&song[a][nextNote[i]]);
   
       // If the player missed the current note
       if (curNote + noPoints < curTime) {
@@ -103,13 +103,13 @@ void loop() {
   // Player 2
   for (int i = 6; i < 10; i++) {
     int a = i - 6;
-    if (nextNote[i] >= testSongSize) {
+    if (nextNote[i] >= songSize) {
       if (!doneNote[i]) {
         songOver++;
         doneNote[i] = true;
       }
     } else { 
-      unsigned long curNote = pgm_read_dword(&testSong[a][nextNote[i]]);
+      unsigned long curNote = pgm_read_dword(&song[a][nextNote[i]]);
   
       // If the player missed the current note
       if (curNote + noPoints < curTime) {
@@ -158,8 +158,8 @@ void loop() {
   }
   
   for (int y = 0; y < 4; y++) {
-    for (int z = 0; z < testSongSize; z++) {
-      unsigned long curNote = pgm_read_dword(&testSong[y][z]);
+    for (int z = 0; z < songSize; z++) {
+      unsigned long curNote = pgm_read_dword(&song[y][z]);
       long delta = curTime - curNote;
       if (abs(delta) <= 500) {
         for (int i = 0; i <= 4; i += 4) {
