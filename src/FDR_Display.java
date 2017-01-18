@@ -90,7 +90,7 @@ public class FDR_Display {
 								System.out.println("Player 1: " + button);
 								System.out.println("Player 2: " + y);
 								gameOver = true;
-								winner = button > y ? "Player 1 Wins!" : "Player 2 Wins!";
+								winner = button > y ? "Player 1 Wins!" : (button == y ? "Tie!" : "Player 2 Wins!");
 							} else if (c.equals("DPA")) {
 								System.out.println("Double Points " + button);
 							} else if (c.equals("FPA")) {
@@ -186,8 +186,8 @@ public class FDR_Display {
 		if (gameOver) {
 			g.setColor(Color.BLUE);
 			g.setFont(gameOverFont);
-			g.drawString("Game Over!", TEXTLOC, textY += (textIncY * 2));
-			g.drawString(winner, TEXTLOC, textY += (textIncY * 2));
+			g.drawString("Game Over!", TEXTLOC - 64, textY += (textIncY * 2));
+			g.drawString(winner, TEXTLOC - 64, textY += (textIncY * 2));
 		}
 
 	}
