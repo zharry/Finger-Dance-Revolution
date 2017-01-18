@@ -78,20 +78,19 @@ public class FDR_Display {
 								mili = button % 1000;
 								seconds = button / 1000;
 							} else if (c.equals("MN")) {
-								// System.out.println("Missed " + button);
+								System.out.println("Missed " + button);
 							} else if (c.equals("SO")) {
-								// System.out.println("Game Over!");
-								// System.out.println("Player 1: " + button);
-								// System.out.println("Player 2: " + y);
+								System.out.println("Game Over!");
+								System.out.println("Player 1: " + button);
+								System.out.println("Player 2: " + y);
 							} else if (c.equals("DPA")) {
-								// System.out.println("Double Points " +
-								// button);
+								System.out.println("Double Points " + button);
 							} else if (c.equals("FPA")) {
-								// System.out.println("Full Points " + button);
+								System.out.println("Full Points " + button);
 							} else if (c.equals("HPA")) {
-								// System.out.println("Half Points " + button);
+								System.out.println("Half Points " + button);
 							} else if (c.equals("NPA")) {
-								// System.out.println("No Points " + button);
+								System.out.println("No Points " + button);
 							} else if (c.equals("SC")) {
 								p1Score = button;
 								p2Score = y;
@@ -168,7 +167,7 @@ public class FDR_Display {
 			g.drawImage(sprDown, xCOORDS[8], arrows.get(8).get(i), null);
 		for (int i = 0; i < arrows.get(9).size(); i++)
 			g.drawImage(sprRight, xCOORDS[9], arrows.get(9).get(i), null);
-		
+
 		g.setColor(Color.BLACK);
 		g.drawString("Player 1: " + p1Score, TEXTLOC, textY += textIncY);
 		g.drawString("Player 2: " + p2Score, TEXTLOC, textY += textIncY);
