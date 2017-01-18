@@ -107,7 +107,7 @@ public class FDR_Display {
 							} else if (c.equals("SS")) {
 								gameOver = false;
 								Runtime.getRuntime().exec("pkill omxplayer");
-								Runtime.getRuntime().exec("omxplayer -o local /home/pi/Finger-Dance-Revolution/Song.wav");
+								Runtime.getRuntime().exec("bash -c \"omxplayer -o local /home/pi/Finger-Dance-Revolution/Song.wav\"");
 							}
 						}
 					} catch (Exception e) {
