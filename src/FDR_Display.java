@@ -47,8 +47,6 @@ public class FDR_Display {
 
 	public static void main(String[] args) throws Exception {
 
-		Runtime.getRuntime().exec("screen /dev/ttyAMA0 115200").destroy();
-
 		for (int i = 0; i < 10; i++)
 			arrows.add(new ArrayList<Integer>());
 
