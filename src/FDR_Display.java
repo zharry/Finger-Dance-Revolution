@@ -5,8 +5,6 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import javax.imageio.ImageIO;
@@ -35,7 +33,7 @@ public class FDR_Display {
 	static BufferedImage sprLeftB, sprRightB, sprTopB, sprDownB;
 
 	static File serial;
-	static InputStream s;
+	static BufferedReader s;
 
 	public static void main(String[] args) throws Exception {
 
@@ -50,7 +48,7 @@ public class FDR_Display {
 		sprDownB = ImageIO.read(new File("DownBlank.png"));
 
 		serial = new File("/dev/ttyAMA0");
-		s = new FileInputStream(serial);
+		s = new BufferedReader(new InputStreamReader(new FileInputStream(serial)), 8);
 
 		// Start Game
 		running = true;
@@ -59,13 +57,16 @@ public class FDR_Display {
 		// Game Loop
 		new Thread() {
 			public void run() {
-				try {
-					byte[] buffer = new byte[1024];
-					int c;
-					while((c = s.read(buffer, 0, 1024)) != -1) {
-					    System.out.print(new String(buffer, 0, c));
+				while (true) {
+					try {
+						//if (processed) {
+						//	commands = "";
+						//	processed = false;
+						//}
+						System.out.println(s.readLine());
+						//commands += s.readLine();
+					} catch (Exception e) {
 					}
-				} catch (IOException e) {
 				}
 			}
 		}.start();
@@ -146,13 +147,13 @@ public class FDR_Display {
 			//	System.out.println("Player 1: " + button);
 			//	System.out.println("Player 2: " + y);
 			} else if (c.equals("DPA")) {
-			//	System.out.println("Double Points " + button);
+//				System.out.println("Double Points " + button);
 			} else if (c.equals("FPA")) {
-			//	System.out.println("Full Points  " + button);
+//				System.out.println("Full Points  " + button);
 			} else if (c.equals("HPA")) {
-			//	System.out.println("Half Points " + button);
+//				System.out.println("Half Points " + button);
 			} else if (c.equals("NPA")) {
-			//	System.out.println("No Points " + button);
+//				System.out.println("No Points " + button);
 			} else if (c.equals("SC")) {
 				g.setColor(Color.black);
 				p1Score = button;
