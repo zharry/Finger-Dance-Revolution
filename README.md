@@ -30,4 +30,4 @@ Grade 11, Computer Engineering Summative. Two player DDR except played with your
 	 */
 	 
 ### Quick Launch Raspberry Pi Command
-export DISPLAY=:0 && cd /home/pi/Finger-Dance-Revolution && git pull && cp src/FDR_Display.java FDR_Display.java && javac FDR_Display.java && java FDR_Display
+export DISPLAY=:0 && xset dpms force on && cd /home/pi/Finger-Dance-Revolution && git pull && cp src/FDR_Display.java FDR_Display.java && javac FDR_Display.java && java FDR_Display
