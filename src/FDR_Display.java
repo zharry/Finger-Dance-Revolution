@@ -5,6 +5,8 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import javax.imageio.ImageIO;
@@ -33,7 +35,7 @@ public class FDR_Display {
 	static BufferedImage sprLeftB, sprRightB, sprTopB, sprDownB;
 
 	static File serial;
-	static BufferedReader s;
+	static InputStream s;
 
 	public static void main(String[] args) throws Exception {
 
@@ -48,7 +50,7 @@ public class FDR_Display {
 		sprDownB = ImageIO.read(new File("DownBlank.png"));
 
 		serial = new File("/dev/ttyAMA0");
-		s = new BufferedReader(new InputStreamReader(new FileInputStream(serial)));
+		s = new FileInputStream(serial);
 
 		// Start Game
 		running = true;
@@ -57,16 +59,12 @@ public class FDR_Display {
 		// Game Loop
 		new Thread() {
 			public void run() {
-				while (true) {
-					try {
-						//if (processed) {
-						//	commands = "";
-						//	processed = false;
-						//}
-						//commands += s.readLine();
-						System.out.println(s.readLine());
-					} catch (Exception e) {
+				int c;
+				try {
+					while((c = s.read()) != -1) {
+					    System.out.print((char)c);
 					}
+				} catch (IOException e) {
 				}
 			}
 		}.start();
