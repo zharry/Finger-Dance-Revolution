@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -27,6 +28,8 @@ public class FDR_Display {
 	static JPanel gamePanel;
 	static JFrame frame;
 	static boolean running;
+	static boolean gameOver = false;
+	static String winner;
 
 	static BufferedImage sprLeft, sprRight, sprTop, sprDown;
 	static BufferedImage sprLeftB, sprRightB, sprTopB, sprDownB;
@@ -34,6 +37,9 @@ public class FDR_Display {
 	static File serial;
 	static BufferedReader s;
 
+	static Font normal = new Font(Font.SANS_SERIF, Font.BOLD, 12);
+	static Font gameOverFont = new Font(Font.SANS_SERIF, Font.BOLD, 25);
+	
 	public static void main(String[] args) throws Exception {
 
 		for (int i = 0; i < 10; i++)
@@ -83,6 +89,8 @@ public class FDR_Display {
 								System.out.println("Game Over!");
 								System.out.println("Player 1: " + button);
 								System.out.println("Player 2: " + y);
+								gameOver = true;
+								winner = button > y ? "Player 1 Wins!" : "Player 2 Wins!";
 							} else if (c.equals("DPA")) {
 								System.out.println("Double Points " + button);
 							} else if (c.equals("FPA")) {
@@ -139,7 +147,7 @@ public class FDR_Display {
 	}
 
 	static void render(Graphics g) throws Exception {
-		int textY = 0, textIncY = 20;
+		int textY = 20, textIncY = 20;
 
 		// Render Game
 		g.drawImage(sprLeftB, xCOORDS[2], 210, null);
@@ -169,10 +177,17 @@ public class FDR_Display {
 			g.drawImage(sprRight, xCOORDS[9], arrows.get(9).get(i), null);
 
 		g.setColor(Color.BLACK);
+		g.setFont(normal);
 		g.drawString("Player 1: " + p1Score, TEXTLOC, textY += textIncY);
 		g.drawString("Player 2: " + p2Score, TEXTLOC, textY += textIncY);
 		g.drawString("Song Time: ", TEXTLOC, textY += textIncY);
 		g.drawString(seconds + ":" + mili, TEXTLOC, textY += textIncY);
+		
+		if (gameOver) {
+			g.setColor(Color.BLUE);
+			g.setFont(gameOverFont);
+			g.drawString("Game Over!" + winner, TEXTLOC, textY += textIncY);
+		}
 
 	}
 
