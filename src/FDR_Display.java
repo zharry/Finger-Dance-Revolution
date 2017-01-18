@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -17,13 +18,11 @@ public class FDR_Display {
 	static final String TITLE = "Finger Dance Revolution";
 	static int width = 600, height = 480, panelWidth, panelHeight;
 
-	static String commands = "";
-	static boolean processed = false;
-
 	static final int[] xCOORDS = { 0, 0, 50, 100, 150, 200, 360, 410, 460, 510 };
 	static final int TEXTLOC = 250;
 	static int p1Score = 0, p2Score = 0;
 	static int mili = 0, seconds = 0;
+	static ArrayList<ArrayList<Integer>> arrows = new ArrayList<ArrayList<Integer>>();
 
 	static JPanel gamePanel;
 	static JFrame frame;
@@ -36,6 +35,9 @@ public class FDR_Display {
 	static BufferedReader s;
 
 	public static void main(String[] args) throws Exception {
+
+		for (int i = 0; i < 10; i++)
+			arrows.add(new ArrayList<Integer>());
 
 		sprLeft = ImageIO.read(new File("Left.png"));
 		sprRight = ImageIO.read(new File("Right.png"));
@@ -59,12 +61,42 @@ public class FDR_Display {
 			public void run() {
 				while (true) {
 					try {
-						//if (processed) {
-						//	commands = "";
-						//	processed = false;
-						//}
-						System.out.println(s.readLine());
-						//commands += s.readLine();
+						String commands = s.readLine();
+						arrows.removeAll(arrows);
+						for (int i = 0; i < 10; i++)
+							arrows.add(new ArrayList<Integer>());
+						String[] cmdList = commands.split("\\+");
+						for (String cmd : cmdList) {
+							String[] proc = cmd.split(":");
+							String c = proc[0];
+							String[] nums = proc[1].split(",");
+							int button = Integer.parseInt(nums[0]);
+							int y = Integer.parseInt(nums[1]);
+							if (c.equals("L") || c.equals("R") || c.equals("T") || c.equals("B")) {
+								arrows.get(button).add(y);
+							} else if (c.equals("CT")) {
+								mili = button % 1000;
+								seconds = button / 1000;
+							} else if (c.equals("MN")) {
+								// System.out.println("Missed " + button);
+							} else if (c.equals("SO")) {
+								// System.out.println("Game Over!");
+								// System.out.println("Player 1: " + button);
+								// System.out.println("Player 2: " + y);
+							} else if (c.equals("DPA")) {
+								// System.out.println("Double Points " +
+								// button);
+							} else if (c.equals("FPA")) {
+								// System.out.println("Full Points " + button);
+							} else if (c.equals("HPA")) {
+								// System.out.println("Half Points " + button);
+							} else if (c.equals("NPA")) {
+								// System.out.println("No Points " + button);
+							} else if (c.equals("SC")) {
+								p1Score = button;
+								p2Score = y;
+							}
+						}
 					} catch (Exception e) {
 					}
 				}
@@ -120,48 +152,22 @@ public class FDR_Display {
 		g.drawImage(sprDownB, xCOORDS[8], 210, null);
 		g.drawImage(sprRightB, xCOORDS[9], 210, null);
 
-		//System.out.println(commands);
-		String[] cmdList = commands.split("\\+");
-		for (String cmd : cmdList) {
-			String[] proc = cmd.split(":");
-			String c = proc[0];
-			String[] nums = proc[1].split(",");
-			int button = Integer.parseInt(nums[0]);
-			int y = Integer.parseInt(nums[1]);
-			if (c.equals("L")) {
-				g.drawImage(sprLeft, xCOORDS[button], y, null);
-			} else if (c.equals("R")) {
-				g.drawImage(sprRight, xCOORDS[button], y, null);
-			} else if (c.equals("T")) {
-				g.drawImage(sprTop, xCOORDS[button], y, null);
-			} else if (c.equals("B")) {
-				g.drawImage(sprDown, xCOORDS[button], y, null);
-			} else if (c.equals("CT")) {
-				g.setColor(Color.black);
-				mili = button % 1000;
-				seconds = button / 1000;
-			} else if (c.equals("MN")) {
-			//	System.out.println("Missed " + button);
-			} else if (c.equals("SO")) {
-			//	System.out.println("Game Over!");
-			//	System.out.println("Player 1: " + button);
-			//	System.out.println("Player 2: " + y);
-			} else if (c.equals("DPA")) {
-//				System.out.println("Double Points " + button);
-			} else if (c.equals("FPA")) {
-//				System.out.println("Full Points  " + button);
-			} else if (c.equals("HPA")) {
-//				System.out.println("Half Points " + button);
-			} else if (c.equals("NPA")) {
-//				System.out.println("No Points " + button);
-			} else if (c.equals("SC")) {
-				g.setColor(Color.black);
-				p1Score = button;
-				p2Score = y;
-			}
-		}
-
-		processed = true;
+		for (int i = 0; i < arrows.get(2).size(); i++)
+			g.drawImage(sprLeft, xCOORDS[2], arrows.get(2).get(i), null);
+		for (int i = 0; i < arrows.get(3).size(); i++)
+			g.drawImage(sprTop, xCOORDS[3], arrows.get(3).get(i), null);
+		for (int i = 0; i < arrows.get(4).size(); i++)
+			g.drawImage(sprDown, xCOORDS[4], arrows.get(4).get(i), null);
+		for (int i = 0; i < arrows.get(5).size(); i++)
+			g.drawImage(sprRight, xCOORDS[5], arrows.get(5).get(i), null);
+		for (int i = 0; i < arrows.get(6).size(); i++)
+			g.drawImage(sprLeft, xCOORDS[6], arrows.get(6).get(i), null);
+		for (int i = 0; i < arrows.get(7).size(); i++)
+			g.drawImage(sprTop, xCOORDS[7], arrows.get(7).get(i), null);
+		for (int i = 0; i < arrows.get(8).size(); i++)
+			g.drawImage(sprDown, xCOORDS[8], arrows.get(8).get(i), null);
+		for (int i = 0; i < arrows.get(9).size(); i++)
+			g.drawImage(sprRight, xCOORDS[9], arrows.get(9).get(i), null);
 
 		g.drawString("Player 1: " + p1Score, TEXTLOC, textY += textIncY);
 		g.drawString("Player 2: " + p2Score, TEXTLOC, textY += textIncY);
