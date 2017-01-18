@@ -44,6 +44,7 @@ public class FDR_Display {
 	static Font gameOverFont = new Font(Font.SANS_SERIF, Font.BOLD, 25);
 
 	static File music;
+	static Clip clip;
 
 	public static void main(String[] args) throws Exception {
 
@@ -62,7 +63,7 @@ public class FDR_Display {
 
 		music = new File("Song.mp3");
 		AudioInputStream stream = AudioSystem.getAudioInputStream(music);
-		Clip clip = AudioSystem.getClip();
+		clip = AudioSystem.getClip();
 	    clip.open(stream);
 
 		serial = new File("/dev/ttyAMA0");
