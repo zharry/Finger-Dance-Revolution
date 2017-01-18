@@ -10,9 +10,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -43,9 +40,6 @@ public class FDR_Display {
 	static Font normal = new Font(Font.SANS_SERIF, Font.BOLD, 12);
 	static Font gameOverFont = new Font(Font.SANS_SERIF, Font.BOLD, 25);
 
-	static File music;
-	static Clip clip;
-
 	public static void main(String[] args) throws Exception {
 
 		for (int i = 0; i < 10; i++)
@@ -60,11 +54,6 @@ public class FDR_Display {
 		sprRightB = ImageIO.read(new File("RightBlank.png"));
 		sprTopB = ImageIO.read(new File("TopBlank.png"));
 		sprDownB = ImageIO.read(new File("DownBlank.png"));
-
-		music = new File("Song.wav");
-		AudioInputStream stream = AudioSystem.getAudioInputStream(music);
-		clip = AudioSystem.getClip();
-	    clip.open(stream);
 
 		serial = new File("/dev/ttyAMA0");
 		//serial = new File("Test");
@@ -103,7 +92,7 @@ public class FDR_Display {
 								System.out.println("Player 2: " + y);
 								gameOver = true;
 								winner = button > y ? "Player 1 Wins!" : (button == y ? "Tie!" : "Player 2 Wins!");
-							    clip.stop();
+								Runtime.getRuntime().exec("pkill omxplayer");
 							} else if (c.equals("DPA")) {
 								System.out.println("Double Points " + button);
 							} else if (c.equals("FPA")) {
@@ -117,8 +106,8 @@ public class FDR_Display {
 								p2Score = y;
 							} else if (c.equals("SS")) {
 								gameOver = false;
-								clip.stop();
-							    clip.start();
+								Runtime.getRuntime().exec("pkill omxplayer");
+								Runtime.getRuntime().exec("omxplayer -o local /home/pi/Finger-Dance-Revolution/Song.wav");
 							}
 						}
 					} catch (Exception e) {
