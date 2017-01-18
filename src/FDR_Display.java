@@ -10,6 +10,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -39,8 +42,12 @@ public class FDR_Display {
 
 	static Font normal = new Font(Font.SANS_SERIF, Font.BOLD, 12);
 	static Font gameOverFont = new Font(Font.SANS_SERIF, Font.BOLD, 25);
-	
+
+	static File music;
+
 	public static void main(String[] args) throws Exception {
+
+		Runtime.getRuntime().exec("screen /dev/ttyAMA0 115200").destroy();
 
 		for (int i = 0; i < 10; i++)
 			arrows.add(new ArrayList<Integer>());
@@ -54,6 +61,11 @@ public class FDR_Display {
 		sprRightB = ImageIO.read(new File("RightBlank.png"));
 		sprTopB = ImageIO.read(new File("TopBlank.png"));
 		sprDownB = ImageIO.read(new File("DownBlank.png"));
+
+		music = new File("Song.mp3");
+		AudioInputStream stream = AudioSystem.getAudioInputStream(music);
+		Clip clip = AudioSystem.getClip();
+	    clip.open(stream);
 
 		serial = new File("/dev/ttyAMA0");
 		s = new BufferedReader(new InputStreamReader(new FileInputStream(serial)), 8);
@@ -91,6 +103,7 @@ public class FDR_Display {
 								System.out.println("Player 2: " + y);
 								gameOver = true;
 								winner = button > y ? "Player 1 Wins!" : (button == y ? "Tie!" : "Player 2 Wins!");
+							    clip.stop();
 							} else if (c.equals("DPA")) {
 								System.out.println("Double Points " + button);
 							} else if (c.equals("FPA")) {
@@ -104,6 +117,7 @@ public class FDR_Display {
 								p2Score = y;
 							} else if (c.equals("SS")) {
 								gameOver = false;
+							    clip.start();
 							}
 						}
 					} catch (Exception e) {
@@ -184,7 +198,7 @@ public class FDR_Display {
 		g.drawString("Player 2: " + p2Score, TEXTLOC, textY += textIncY);
 		g.drawString("Song Time: ", TEXTLOC, textY += textIncY);
 		g.drawString(seconds + ":" + mili, TEXTLOC, textY += textIncY);
-		
+
 		if (gameOver) {
 			g.setColor(Color.BLUE);
 			g.setFont(gameOverFont);
