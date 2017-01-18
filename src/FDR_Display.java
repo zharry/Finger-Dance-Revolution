@@ -168,7 +168,8 @@ public class FDR_Display {
 			g.drawImage(sprDown, xCOORDS[8], arrows.get(8).get(i), null);
 		for (int i = 0; i < arrows.get(9).size(); i++)
 			g.drawImage(sprRight, xCOORDS[9], arrows.get(9).get(i), null);
-
+		
+		g.setColor(Color.BLACK);
 		g.drawString("Player 1: " + p1Score, TEXTLOC, textY += textIncY);
 		g.drawString("Player 2: " + p2Score, TEXTLOC, textY += textIncY);
 		g.drawString("Song Time: ", TEXTLOC, textY += textIncY);
