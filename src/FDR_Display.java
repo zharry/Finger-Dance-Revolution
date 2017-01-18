@@ -186,8 +186,8 @@ public class FDR_Display {
 		if (gameOver) {
 			g.setColor(Color.BLUE);
 			g.setFont(gameOverFont);
-			g.drawString("Game Over!", TEXTLOC - 48, textY += (textIncY * 2));
-			g.drawString(winner, TEXTLOC - 48, textY += (textIncY * 2));
+			g.drawString("Game Over!", TEXTLOC - 40, textY += (textIncY * 2));
+			g.drawString(winner, TEXTLOC - 40, textY += (textIncY * 2));
 		}
 
 	}
