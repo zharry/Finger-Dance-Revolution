@@ -118,7 +118,7 @@ public class FDR_Display {
 		g.drawImage(sprDownB, xCOORDS[8], 210, null);
 		g.drawImage(sprRightB, xCOORDS[9], 210, null);
 
-		System.out.println(commands);
+		//System.out.println(commands);
 		String[] cmdList = commands.split("\\+");
 		for (String cmd : cmdList) {
 			String[] proc = cmd.split(":");
@@ -139,19 +139,19 @@ public class FDR_Display {
 				mili = button % 1000;
 				seconds = button / 1000;
 			} else if (c.equals("MN")) {
-				System.out.println("Missed " + button);
+			//	System.out.println("Missed " + button);
 			} else if (c.equals("SO")) {
-				System.out.println("Game Over!");
-				System.out.println("Player 1: " + button);
-				System.out.println("Player 2: " + y);
+			//	System.out.println("Game Over!");
+			//	System.out.println("Player 1: " + button);
+			//	System.out.println("Player 2: " + y);
 			} else if (c.equals("DPA")) {
-				System.out.println("Double Points " + button);
+			//	System.out.println("Double Points " + button);
 			} else if (c.equals("FPA")) {
-				System.out.println("Full Points  " + button);
+			//	System.out.println("Full Points  " + button);
 			} else if (c.equals("HPA")) {
-				System.out.println("Half Points " + button);
+			//	System.out.println("Half Points " + button);
 			} else if (c.equals("NPA")) {
-				System.out.println("No Points " + button);
+			//	System.out.println("No Points " + button);
 			} else if (c.equals("SC")) {
 				g.setColor(Color.black);
 				p1Score = button;
