@@ -4,7 +4,7 @@ Grade 11, Computer Engineering Summative. Two player DDR except played with your
 ### Included Libraries
 - https://github.com/AndrewMascolo/CountUpDownTimer
 
-### Commands Listing being sent from Arduino to Raspberry Pi
+### Commands Listing being sent from Arduino to Raspberry Pi 
 ```
 Commands Separated by "+"
 	Each Command is made up of
